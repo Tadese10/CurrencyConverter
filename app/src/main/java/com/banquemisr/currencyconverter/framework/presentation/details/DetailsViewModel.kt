@@ -4,16 +4,12 @@ import android.os.Parcelable
 import com.banquemisr.currencyconverter.business.domain.state.DataState
 import com.banquemisr.currencyconverter.business.domain.state.StateEvent
 import com.banquemisr.currencyconverter.business.interactors.details.DetailsInteractors
-import com.banquemisr.currencyconverter.business.interactors.home.HomeInteractors
-import com.banquemisr.currencyconverter.framework.datasource.network.model.CurrencyConverterResponse
 import com.banquemisr.currencyconverter.framework.datasource.network.model.Histories
-import com.banquemisr.currencyconverter.framework.datasource.network.model.SymbolResponse
 import com.banquemisr.currencyconverter.framework.presentation.common.BaseViewModel
 import com.banquemisr.currencyconverter.framework.presentation.details.state.DetailsStateEvent
 import com.banquemisr.currencyconverter.framework.presentation.details.state.DetailsViewState
-import com.banquemisr.currencyconverter.framework.presentation.home.state.HomeStateEvent
-import com.banquemisr.currencyconverter.framework.presentation.home.state.HomeViewState
 import com.banquemisr.currencyconverter.util.printLogD
+import com.google.gson.internal.LinkedTreeMap
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.Flow
@@ -41,8 +37,16 @@ class DetailsViewModel
             viewState.Histories?.let {
                 setHistories(it)
             }
-
+            viewState.PopularHistories?.let {
+                setPopularHistories(it)
+            }
         }
+    }
+
+    private fun setPopularHistories(it: LinkedTreeMap<String, String>?) {
+        val update = getCurrentViewStateOrNew()
+        update.PopularHistories = it
+        setViewState(update)
     }
 
     private fun setHistories(it: Histories) {
@@ -57,6 +61,12 @@ class DetailsViewModel
 
             is DetailsStateEvent.GetCurrencyConversionHistories ->{
                 detailsInteractors.histories.get(
+                    stateEvent = stateEvent
+                )
+            }
+
+            is DetailsStateEvent.GetPopularCurrencyConversionHistories ->{
+                detailsInteractors.popularHistories.get(
                     stateEvent = stateEvent
                 )
             }

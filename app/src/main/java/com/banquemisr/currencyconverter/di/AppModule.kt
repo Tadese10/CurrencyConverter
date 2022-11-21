@@ -5,6 +5,7 @@ import com.banquemisr.currencyconverter.business.data.network.abstraction.AppNet
 import com.banquemisr.currencyconverter.business.data.network.implementation.AppNetworkDataSourceImpl
 import com.banquemisr.currencyconverter.business.interactors.details.DetailsInteractors
 import com.banquemisr.currencyconverter.business.interactors.details.GetHistories
+import com.banquemisr.currencyconverter.business.interactors.details.GetPopularHistories
 import com.banquemisr.currencyconverter.business.interactors.home.ConvertCurrency
 import com.banquemisr.currencyconverter.business.interactors.home.GetAllSymbols
 import com.banquemisr.currencyconverter.business.interactors.home.HomeInteractors
@@ -94,6 +95,9 @@ object AppModule {
     ): DetailsInteractors {
         return DetailsInteractors(
             histories  = GetHistories(
+                appNetworkDataSource
+            ),
+            popularHistories = GetPopularHistories(
                 appNetworkDataSource
             )
         )

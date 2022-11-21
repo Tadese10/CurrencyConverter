@@ -17,4 +17,19 @@ sealed class DetailsStateEvent : StateEvent {
 
         override fun shouldDisplayProgressBar() = true
     }
+
+    class GetPopularCurrencyConversionHistories(
+        val start_date: String, val end_date: String
+    ) : DetailsStateEvent() {
+
+        override fun errorInfo(): String {
+            return "Error fetching all histories."
+        }
+
+        override fun eventName(): String {
+            return "GetPopularCurrencyConversionHistories"
+        }
+
+        override fun shouldDisplayProgressBar() = false
+    }
 }

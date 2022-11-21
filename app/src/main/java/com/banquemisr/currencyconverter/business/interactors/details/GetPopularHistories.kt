@@ -10,27 +10,28 @@ import com.banquemisr.currencyconverter.business.domain.state.UIComponentType
 import com.banquemisr.currencyconverter.framework.datasource.network.model.Histories
 import com.banquemisr.currencyconverter.framework.presentation.details.state.DetailsStateEvent
 import com.banquemisr.currencyconverter.framework.presentation.details.state.DetailsViewState
+import com.google.gson.internal.LinkedTreeMap
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
-class GetHistories(
+class GetPopularHistories(
     private val networkDataSource: AppNetworkDataSource,
 ) {
-    fun get(stateEvent: DetailsStateEvent.GetCurrencyConversionHistories): Flow<DataState<DetailsViewState>?> =
+    fun get(stateEvent: DetailsStateEvent.GetPopularCurrencyConversionHistories): Flow<DataState<DetailsViewState>?> =
         flow {
 
             val networkResult = safeApiCall(Dispatchers.IO) {
-                networkDataSource.getHistories(stateEvent.start_date, stateEvent.end_date, stateEvent.fromCurrency, stateEvent.toCurrency)
+                networkDataSource.getPopularHistories(stateEvent.start_date, stateEvent.end_date)
             }
 
-            val response = object : ApiResponseHandler<DetailsViewState, Histories>(
+            val response = object : ApiResponseHandler<DetailsViewState, LinkedTreeMap<String, String>?>(
                 response = networkResult,
                 stateEvent = stateEvent
             ) {
-                override suspend fun handleSuccess(resultObj: Histories): DataState<DetailsViewState> {
+                override suspend fun handleSuccess(resultObj: LinkedTreeMap<String, String>?): DataState<DetailsViewState> {
                     val data = DetailsViewState(
-                        Histories = resultObj,
+                        PopularHistories = resultObj
                     )
                     return DataState.data(
                         response = Response(

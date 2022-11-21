@@ -16,3 +16,9 @@ data class CurrencyConverterResponse
 constructor(val success: Boolean,
             val result: Double? = null,
 ): Parcelable
+
+@Parcelize
+data class PopularCurrencyConverterResponse
+constructor(val success: Boolean,
+            val rates: LinkedTreeMap<String, String>? = null,
+): Parcelable

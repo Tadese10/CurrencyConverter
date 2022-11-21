@@ -6,6 +6,7 @@ import com.banquemisr.currencyconverter.framework.datasource.network.model.Curre
 import com.banquemisr.currencyconverter.framework.datasource.network.model.Histories
 import com.banquemisr.currencyconverter.framework.datasource.network.model.SymbolResponse
 import com.banquemisr.currencyconverter.util.printLogD
+import com.google.gson.internal.LinkedTreeMap
 import org.json.JSONObject
 import retrofit2.Response
 import javax.inject.Inject
@@ -51,6 +52,19 @@ constructor(
             return data.body()
         }
         return Histories(false, null)
+    }
+
+    override suspend fun getPopularHistories(
+        start_date: String,end_date: String
+    ): LinkedTreeMap<String, String>? {
+        var data = appNetworkServiceApi.getPopularHistories(end_date, start_date,"", "")
+        printLogD("PopularHistoriesResponse", data.toString())
+        if(data.isSuccessful){
+            printLogD("Histories", data.body().toString())
+
+            return data.body()?.rates
+        }
+        return null
     }
 
 }

@@ -6,6 +6,7 @@ import com.banquemisr.currencyconverter.framework.datasource.network.implementat
 import com.banquemisr.currencyconverter.framework.datasource.network.model.CurrencyConverterResponse
 import com.banquemisr.currencyconverter.framework.datasource.network.model.Histories
 import com.banquemisr.currencyconverter.framework.datasource.network.model.SymbolResponse
+import com.google.gson.internal.LinkedTreeMap
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -30,4 +31,6 @@ constructor(
         base: String,
         symbols: String
     ): Histories? = appService.getHistories(start_date, end_date, base, symbols)
+
+    override suspend fun getPopularHistories(start_date: String, end_date: String): LinkedTreeMap<String, String>?  = appService.getPopularHistories(start_date, end_date)
 }

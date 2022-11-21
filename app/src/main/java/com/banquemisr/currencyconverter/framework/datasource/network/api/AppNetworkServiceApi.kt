@@ -2,7 +2,9 @@ package com.banquemisr.currencyconverter.framework.datasource.network.api
 
 import com.banquemisr.currencyconverter.framework.datasource.network.model.CurrencyConverterResponse
 import com.banquemisr.currencyconverter.framework.datasource.network.model.Histories
+import com.banquemisr.currencyconverter.framework.datasource.network.model.PopularCurrencyConverterResponse
 import com.banquemisr.currencyconverter.framework.datasource.network.model.SymbolResponse
+import com.google.gson.internal.LinkedTreeMap
 import retrofit2.Response
 import retrofit2.http.*
 
@@ -15,6 +17,9 @@ import retrofit2.http.*
   suspend fun convertCurrency(@Query("to") ToCurrency: String, @Query("from") fromCurrency: String, @Query("amount") Amount: String): Response<CurrencyConverterResponse>
 
   @GET("fixer/timeseries")
-  suspend fun getHistories(@Query("start_date") start_date: String, @Query("end_date") end_date: String, @Query("base") base: String,  @Query("symbols") symbols: String): Response<Histories>
+  suspend fun getHistories(@Query("start_date") start_date: String, @Query("end_date") end_date: String, @Query("base") base: String?,  @Query("symbols") symbols: String?): Response<Histories>
+
+  @GET("fixer/timeseries")
+  suspend fun getPopularHistories(@Query("start_date") start_date: String, @Query("end_date") end_date: String, @Query("base") base: String?,  @Query("symbols") symbols: String?): Response<PopularCurrencyConverterResponse>
 
  }

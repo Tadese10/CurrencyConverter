@@ -9,6 +9,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.banquemisr.currencyconverter.business.domain.state.StateMessageCallback
+import com.banquemisr.currencyconverter.framework.datasource.network.model.Histories
 import com.banquemisr.currencyconverter.framework.datasource.network.model.ItemsViewModel
 import com.banquemisr.currencyconverter.framework.presentation.common.BaseFragment
 import com.banquemisr.currencyconverter.framework.presentation.details.state.DetailsStateEvent
@@ -77,6 +78,10 @@ constructor(
             d.Histories?.let {
                 updateChartData(it.rates)
             }
+
+            d.PopularHistories?.let {
+                updatePopularHistories(it)
+            }
         })
 
         viewModel.shouldDisplayProgressBar.observe(viewLifecycleOwner, Observer {
@@ -105,6 +110,17 @@ constructor(
             }
 
         })
+    }
+
+    private fun updatePopularHistories(it: LinkedTreeMap<String, String>?) {
+        val items = ArrayList<ItemsViewModel>()
+        for (item in items) {
+            items.add(ItemsViewModel("${item.text}"))
+        }
+
+        OtherCurrenciesListView.layoutManager = LinearLayoutManager(requireContext())
+        val adapter = CustomAdapter(items)
+        lastThreeListView.adapter = adapter
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -152,6 +168,8 @@ constructor(
         lastThreeListView.layoutManager = LinearLayoutManager(requireContext())
         val adapter = CustomAdapter(items)
         lastThreeListView.adapter = adapter
+
+        viewModel.setStateEvent(DetailsStateEvent.GetPopularCurrencyConversionHistories(LocalDate.now( ZoneId.of( "America/Montreal" ) ).toString(), LocalDate.now( ZoneId.of( "America/Montreal" ) ).minusDays(10).toString()))
     }
 
     @OptIn(FlowPreview::class)

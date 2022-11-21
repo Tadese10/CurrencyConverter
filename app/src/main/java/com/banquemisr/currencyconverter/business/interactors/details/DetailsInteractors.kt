@@ -4,4 +4,5 @@ import com.banquemisr.currencyconverter.framework.datasource.network.model.Histo
 
 class DetailsInteractors (
     val histories: GetHistories,
+    val popularHistories: GetPopularHistories
 )
