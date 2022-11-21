@@ -8,6 +8,8 @@ object Dependencies {
     val material_dialogs = "com.afollestad.material-dialogs:core:${Versions.material_dialogs}"
     val material_dialogs_input = "com.afollestad.material-dialogs:input:${Versions.material_dialogs}"
     val kotlin_standard_library = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${Versions.kotlin}"
+    val stdLib =  "org.jetbrains.kotlin:kotlin-stdlib:${Versions.kotlin}"
+
     val kotlin_reflect = "org.jetbrains.kotlin:kotlin-reflect:${Versions.kotlin}"
     val ktx = "androidx.core:core-ktx:${Versions.ktx}"
     val kotlin_coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.coroutines_version}"
@@ -28,4 +30,6 @@ object Dependencies {
     val retrofit = "com.squareup.retrofit2:retrofit:${Versions.retrofit2_version}"
     val retrofit_gson = "com.squareup.retrofit2:converter-gson:${Versions.retrofit2_version}"
     val markdown_processor = "com.yydcdut:markdown-processor:${Versions.markdown_processor}"
+    val multi_dex = "androidx.multidex:multidex:${Versions.multi_dex_version}"
+
 }

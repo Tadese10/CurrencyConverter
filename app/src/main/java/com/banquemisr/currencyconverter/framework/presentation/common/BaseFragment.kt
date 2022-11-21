@@ -8,7 +8,9 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.annotation.LayoutRes
 import androidx.fragment.app.Fragment
-import com.banquemisr.currencyconverter.MainActivity
+import com.banquemisr.currencyconverter.di.AppComponent
+import com.banquemisr.currencyconverter.framework.presentation.BaseApplication
+import com.banquemisr.currencyconverter.framework.presentation.MainActivity
 import com.banquemisr.currencyconverter.framework.presentation.UIController
 import com.banquemisr.currencyconverter.util.TodoCallback
 import java.lang.ClassCastException
@@ -68,11 +70,11 @@ constructor(
 
     abstract fun inject()
 
-//    fun getAppComponent(): AppComponent {
-//        return activity?.run {
-//            (application as BaseApplication).appComponent
-//        }?: throw Exception("AppComponent is null.")
-//    }
+    fun getAppComponent(): AppComponent {
+        return activity?.run {
+            (application as BaseApplication).appComponent
+        }?: throw Exception("AppComponent is null.")
+    }
 
     override fun onAttach(context: Context) {
         inject()

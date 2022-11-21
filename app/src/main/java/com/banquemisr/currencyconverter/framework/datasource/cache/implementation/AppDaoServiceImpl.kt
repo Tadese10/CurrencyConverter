@@ -12,8 +12,6 @@ class AppDaoServiceImpl
 @Inject
 constructor(
     private val appDao: AppDao,
-    private val appMapper: CacheMapper,
-    private val dateUtil: DateUtil
 ): AppDaoService {
 
 }

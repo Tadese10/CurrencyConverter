@@ -13,7 +13,6 @@ constructor(
     private val response: ApiResult<Data?>,
     private val stateEvent : StateEvent?
 ){
-
     suspend fun getResult(): DataState<ViewState>{
         return when(response){
             is ApiResult.GenericError ->{
@@ -47,6 +46,7 @@ constructor(
                         ),
                         stateEvent =  stateEvent
                     )
+
                 }
                 else{
                     handleSuccess(response.value)

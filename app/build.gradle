@@ -8,8 +8,8 @@ plugins {
 }
 
 android {
-    namespace Application.id
     compileSdk Versions.compilesdk
+    buildToolsVersion Versions.build_tools
 
     defaultConfig {
         applicationId "com.banquemisr.currencyconverter"
@@ -18,15 +18,29 @@ android {
         versionCode Application.version_code
         versionName Application.version_name
 
+        // Enabling multidex support.
+        multiDexEnabled true
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments += ["room.schemaLocation": "$projectDir/schemas".toString(),
+                              "room.incremental":"true",
+                              "room.expandProjection":"true"]
+            }
+        }
+
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
         debug {
             minifyEnabled false
+            shrinkResources false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
         release {
-            minifyEnabled false
+            minifyEnabled true
+            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
@@ -35,15 +49,12 @@ android {
         viewBinding true
     }
 
-    sourceSets {
-        test.resources.srcDirs += 'src/test/res'
-    }
-
     testOptions {
         unitTests.all {
             useJUnitPlatform()
         }
     }
+
     compileOptions {
         sourceCompatibility Java.java_version
         targetCompatibility Java.java_version
@@ -54,23 +65,13 @@ android {
 }
 
 dependencies {
-    implementation Dependencies.ktx
-    implementation Dependencies.kotlin_standard_library
-    implementation Dependencies.kotlin_reflect
-
     //Dependencies
+    implementation Dependencies.kotlin_standard_library //"org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    implementation Dependencies.ktx //'androidx.core:core-ktx:1.3.2'
+    implementation Dependencies.kotlin_reflect
     implementation Dependencies.dagger
     implementation Dependencies.kotlin_coroutines
     implementation Dependencies.kotlin_coroutines_android
-
-    //Support
-    implementation SupportDependencies.appcompat
-    implementation SupportDependencies.constraintlayout
-    implementation SupportDependencies.material_design
-    implementation SupportDependencies.swipe_refresh_layout
-
-    //To return coroutine from the  task
-    implementation Dependencies.kotlin_coroutines_play_services
     implementation Dependencies.retrofit
     implementation Dependencies.retrofit_gson
     implementation Dependencies.room_ktx
@@ -82,20 +83,11 @@ dependencies {
     implementation Dependencies.navigation_dynamic
     implementation Dependencies.material_dialogs
     implementation Dependencies.material_dialogs_input
-    //implementation Dependencies.markdown_processor
-
-    //Annotation Processing
-    kapt AnnotationProcessing.dagger_compiler
-    kapt AnnotationProcessing.room_compiler
-
-    //Unit Tests
-    testImplementation TestDependencies.mockk
-    testImplementation TestDependencies.jupiter_api
-    testRuntimeOnly TestDependencies.jupiter_engine
-    testImplementation TestDependencies.jupiter_params
-    testImplementation TestDependencies.junit4
-
-
+    implementation Dependencies.multi_dex
+    implementation Dependencies.stdLib
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'//with androidx libraries
+    implementation 'com.github.dononcharles:MaterialAutoCompleteTextViewWithHeaders:1.1'
+    implementation files('C:\\Users\\ytaju\\AndroidStudioProjects\\CurrencyConverter\\customedittext-1.0.4.aar')
 
     androidTestImplementation AndroidTestDependencies.test_rules
     androidTestImplementation AndroidTestDependencies.text_core_ktx
@@ -103,4 +95,22 @@ dependencies {
     debugImplementation AndroidTestDependencies.fragment_testing
     kaptAndroidTest  AnnotationProcessing.dagger_compiler
     androidTestImplementation AndroidTestDependencies.test_runner
+    //Annotation Processing
+    kapt  AnnotationProcessing.dagger_compiler
+    kapt  AnnotationProcessing.room_compiler
+
+
+
+    //Support
+    implementation SupportDependencies.appcompat
+    implementation SupportDependencies.constraintlayout
+    implementation SupportDependencies.material_design
+    implementation SupportDependencies.swipe_refresh_layout
+
+    //Unit Tests
+    testImplementation TestDependencies.mockk
+    testImplementation TestDependencies.jupiter_api
+    testRuntimeOnly TestDependencies.jupiter_engine
+    testImplementation TestDependencies.jupiter_params
+    testImplementation TestDependencies.junit4 // We need this to do some assertions not to run the test itself
 }

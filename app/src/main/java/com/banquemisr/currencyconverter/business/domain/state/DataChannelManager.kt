@@ -43,6 +43,7 @@ abstract class DataChannelManager<ViewState> {
                             dataState.stateEvent?.let { stateEvent ->
                                 removeStateEvent(stateEvent)
                             }
+
                         }
                     }
                 }
