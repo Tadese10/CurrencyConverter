@@ -180,6 +180,8 @@ constructor(
         To.doAfterItemSelected { selectedIndex ->
             convertCurrency(fromText.text.toString(), toText.text.toString())
         }
+
+        btnDetails.isClickable = true
     }
 
     private fun convertCurrency(fromCurrency: String, toCurrency: String) {
