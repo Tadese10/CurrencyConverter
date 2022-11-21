@@ -14,23 +14,32 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"
-            app:popUpTo="@id/homeFragment"
-            app:popUpToInclusive="true"
+            app:destination="@id/detailsFragment"
             />
     </fragment>
 
-<!--    <fragment-->
-<!--        android:id="@+id/noteListFragment"-->
-<!--        android:name="com.example.cleanarchitecture.framework.presentation.notelist.NoteListFragment"-->
-<!--        >-->
-<!--        <action-->
-<!--            android:id="@+id/action_note_list_fragment_to_noteDetailFragment"-->
-<!--            app:destination="@id/noteDetailFragment"-->
-<!--            app:popEnterAnim="@anim/slide_in_left"-->
-<!--            app:popExitAnim="@anim/slide_out_right"-->
-<!--            app:enterAnim="@anim/slide_in_right"-->
-<!--            app:exitAnim="@anim/slide_out_left"/>-->
-<!--    </fragment>-->
+    <fragment
+        android:id="@+id/detailsFragment"
+        android:name="com.banquemisr.currencyconverter.framework.presentation.details.DetailsFragment"
+        >
+        <action
+            android:id="@+id/action_note_list_fragment_to_noteDetailFragment"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popUpTo="@id/homeFragment">
+            <argument
+                android:name="FromCurrency"
+                app:argType="string"
+                android:defaultValue=""/>
+            <argument
+                android:name="ToCurrency"
+                app:argType="string"
+                android:defaultValue=""/>
+        </action>
+
+    </fragment>
 
 
 

@@ -4,6 +4,7 @@ import com.banquemisr.currencyconverter.business.data.network.abstraction.AppNet
 import com.banquemisr.currencyconverter.framework.datasource.network.abstraction.AppNetworkService
 import com.banquemisr.currencyconverter.framework.datasource.network.implementation.AppNetworkServiceImpl
 import com.banquemisr.currencyconverter.framework.datasource.network.model.CurrencyConverterResponse
+import com.banquemisr.currencyconverter.framework.datasource.network.model.Histories
 import com.banquemisr.currencyconverter.framework.datasource.network.model.SymbolResponse
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -22,4 +23,11 @@ constructor(
         fromCurrency: String,
         Amount: String
     ): CurrencyConverterResponse? = appService.convertCurrency(ToCurrency, fromCurrency, Amount)
+
+    override suspend fun getHistories(
+        start_date: String,
+        end_date: String,
+        base: String,
+        symbols: String
+    ): Histories? = appService.getHistories(start_date, end_date, base, symbols)
 }

@@ -3,6 +3,8 @@ package com.banquemisr.currencyconverter.di
 import android.content.SharedPreferences
 import com.banquemisr.currencyconverter.business.data.network.abstraction.AppNetworkDataSource
 import com.banquemisr.currencyconverter.business.data.network.implementation.AppNetworkDataSourceImpl
+import com.banquemisr.currencyconverter.business.interactors.details.DetailsInteractors
+import com.banquemisr.currencyconverter.business.interactors.details.GetHistories
 import com.banquemisr.currencyconverter.business.interactors.home.ConvertCurrency
 import com.banquemisr.currencyconverter.business.interactors.home.GetAllSymbols
 import com.banquemisr.currencyconverter.business.interactors.home.HomeInteractors
@@ -11,6 +13,7 @@ import com.banquemisr.currencyconverter.framework.datasource.cache.implementatio
 import com.banquemisr.currencyconverter.framework.datasource.network.abstraction.AppNetworkService
 import com.banquemisr.currencyconverter.framework.datasource.network.api.AppNetworkServiceApi
 import com.banquemisr.currencyconverter.framework.datasource.network.implementation.AppNetworkServiceImpl
+import com.banquemisr.currencyconverter.framework.datasource.network.model.Histories
 import com.banquemisr.currencyconverter.framework.datasource.network.util.NetworkRetrofitBuilder
 import dagger.Module
 import dagger.Provides
@@ -78,6 +81,19 @@ object AppModule {
                 appNetworkDataSource
             ),
             ConvertCurrency(
+                appNetworkDataSource
+            )
+        )
+    }
+
+    @JvmStatic
+    @Singleton
+    @Provides
+    fun provideDetailsInteractors(
+        appNetworkDataSource: AppNetworkDataSource,
+    ): DetailsInteractors {
+        return DetailsInteractors(
+            histories  = GetHistories(
                 appNetworkDataSource
             )
         )

@@ -2,6 +2,7 @@ package com.banquemisr.currencyconverter.di
 
 import com.banquemisr.currencyconverter.framework.presentation.BaseApplication
 import com.banquemisr.currencyconverter.framework.presentation.MainActivity
+import com.banquemisr.currencyconverter.framework.presentation.details.DetailsFragment
 import com.banquemisr.currencyconverter.framework.presentation.home.MainFragment
 import dagger.BindsInstance
 import dagger.Component
@@ -30,4 +31,8 @@ interface  AppComponent{
     fun inject(mainActivity: MainActivity)
 
     fun inject(mainFragment: MainFragment)
+
+    fun inject(detailsFragment: DetailsFragment)
+
+
 }

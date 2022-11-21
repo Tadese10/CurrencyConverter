@@ -3,6 +3,7 @@ package com.banquemisr.currencyconverter.framework.presentation.common
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentFactory
 import androidx.lifecycle.ViewModelProvider
+import com.banquemisr.currencyconverter.framework.presentation.details.DetailsFragment
 import com.banquemisr.currencyconverter.framework.presentation.home.MainFragment
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
@@ -21,6 +22,11 @@ constructor(
         when (className) {
             MainFragment::class.java.name -> {
                 val fragment = MainFragment(viewModelFactory)
+                fragment
+            }
+
+            DetailsFragment::class.java.name -> {
+                val fragment = DetailsFragment(viewModelFactory)
                 fragment
             }
             else -> {

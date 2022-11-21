@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:padding="25dp">
+
+    <com.github.aachartmodel.aainfographics.aachartcreator.AAChartView
+        android:id="@+id/lastThreeDaysChart"
+        android:layout_width="match_parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_height="200dp">
+
+    </com.github.aachartmodel.aainfographics.aachartcreator.AAChartView>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/lastThreeListView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/lastThreeDaysChart"
+        app:layout_constraintEnd_toStartOf="@+id/OtherCurrenciesListView"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:listitem="@layout/card_view_design"
+         />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/OtherCurrenciesListView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        tools:listitem="@layout/card_view_design"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/lastThreeDaysChart"
+        app:layout_constraintStart_toEndOf="@+id/lastThreeListView"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

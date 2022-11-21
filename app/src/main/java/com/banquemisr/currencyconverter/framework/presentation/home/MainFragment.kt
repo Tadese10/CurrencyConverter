@@ -3,8 +3,6 @@ package com.banquemisr.currencyconverter.framework.presentation.home
 import android.os.Bundle
 import android.text.Editable
 import android.view.View
-import androidx.core.widget.doAfterTextChanged
-import androidx.core.widget.doBeforeTextChanged
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -92,6 +90,10 @@ constructor(
 
         refreshLayout.setOnRefreshListener {
             viewModel.setStateEvent(HomeStateEvent.GetAllSymbolsEvent())
+        }
+
+        btnDetails.setOnClickListener {
+            navDetailsFragment()
         }
 
         btnSwap.setOnClickListener {
@@ -186,8 +188,11 @@ constructor(
         viewModel.setStateEvent(HomeStateEvent.ConvertCurrencyEvent(fromCurrency, toCurrency, fromValue.text.toString()))
     }
 
-    private fun navNoteListFragment(){
-        findNavController().navigate(R.id.action_to_detailsFragment)
+    private fun navDetailsFragment(){
+        val bundle = Bundle()
+        bundle.putString("base", fromText.text.toString())
+        bundle.putString("symbols", toText.text.toString())
+        findNavController().navigate(R.id.action_to_detailsFragment, bundle)
     }
 
     fun currencyFormat(amount: String): String? {

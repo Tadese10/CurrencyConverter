@@ -88,6 +88,7 @@ dependencies {
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'//with androidx libraries
     implementation 'com.github.dononcharles:MaterialAutoCompleteTextViewWithHeaders:1.1'
     implementation files('C:\\Users\\ytaju\\AndroidStudioProjects\\CurrencyConverter\\customedittext-1.0.4.aar')
+    implementation 'com.github.AAChartModel:AAChartCore-Kotlin:-SNAPSHOT'
 
     androidTestImplementation AndroidTestDependencies.test_rules
     androidTestImplementation AndroidTestDependencies.text_core_ktx
